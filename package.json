@@ -1,0 +1,27 @@
+{
+  "name": "curly-funicular",
+  "version": "1.0.0",
+  "description": "Select the active menu item when scrolling",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valeriyshashkin/curly-funicular.git"
+  },
+  "author": "valeriyshashkin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valeriyshashkin/curly-funicular/issues"
+  },
+  "homepage": "https://github.com/valeriyshashkin/curly-funicular#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}
