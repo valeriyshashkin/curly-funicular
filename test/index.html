@@ -4,6 +4,7 @@
 	<meta name="robots" content="noindex, nofollow">
 
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
@@ -65,6 +66,10 @@
 	</script>
 </head>
 <body>
+	<div id="mocha"></div>
+	<script src="../node_modules/mocha/mocha.js"></script>
+	<script src="../node_modules/chai/chai.js"></script>
+	<script>mocha.setup('bdd');</script>
 	<div class="desktop-panel" id="desktop-menu">
 		<div class="tab active" data-menuanchor="header">
 			<a href="#header" class="tab-link">
@@ -106,4 +111,8 @@
 	<div class="section" data-anchor="header"></div>
 	<div class="section" data-anchor="works"></div>
 	<div class="section" data-anchor="contacts"></div>
+
+	<script src="../dist/curly-funicular.js"></script>
+	<script src="test.js"></script>
+	<script>mocha.run();</script>
 </body>
