@@ -41,7 +41,7 @@ a.tab-link, a.tab-link:visited {
 	color: rgb(167, 167, 167);
 }
 
-.tab.active .tab-link {
+.tab.cfactive .tab-link {
 	color: black;
 	font-weight: bold;
 }
