@@ -47,30 +47,24 @@ a.tab-link, a.tab-link:visited {
 }
 
 .desktop-panel {
-	display: none;
+	position: fixed;
+	width: 100%;
+
+	top: 0;
+
+	background: #FFFFFF;
+	display: flex;
+	z-index: 10;
 }
 
-@media only screen and (min-width: 950px) {
-	.desktop-panel {
-		position: fixed;
-		width: 100%;
+a.tab-link:hover {
+	color: black;
+}
 
-		bottom: 0;
+.tab-link {
+	padding: 17.5px 0;
+}
 
-		background: #FFFFFF;
-		display: flex;
-		z-index: 10;
-	}
-
-	a.tab-link:hover {
-		color: black;
-	}
-
-	.tab-link {
-		padding: 17.5px 0;
-	}
-
-	.tab-title {
-		font-size: 16px;
-	}
+.tab-title {
+	font-size: 16px;
 }

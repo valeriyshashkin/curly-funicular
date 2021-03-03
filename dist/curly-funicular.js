@@ -1,49 +1,45 @@
-(function(window) {
-    let anchors;
-    let offset;
-    let previousAnchor;
-
-    window.curlyFunicular = function (config) {
-        ({anchors, offset} = config);
-        offset = offset || 0;
-        previousAnchor = anchors[0];
+class CurlyFunicular {
+    constructor (config) {
+        this.anchors = config.anchors;
+        this.offset = config.offset || 0;
+        this.previousAnchor = this.anchors[0];
 
         if (!window.location.hash) {
-            window.location.hash = anchors[0];
+            window.location.hash = this.anchors[0];
         }
 
-        selectMenuItem(window.location.hash);
-        handleClick();
-        listenEvent();
+        this.selectMenuItem(window.location.hash);
+        this.handleClick();
+        this.listenEvent();
     }
 
-    function listenEvent() {
-        window.addEventListener('scroll', function() {
+    listenEvent() {
+        window.addEventListener('scroll', () => {
             let isMenuChanged = false;
-            for (let i = 0; i < anchors.length - 1; i++) {
-                let topElement = `[data-cfanchor="${anchors[i].replace('#', '')}"]`;
-                let bottomElement = `[data-cfanchor="${anchors[i + 1].replace('#', '')}"]`;
+            for (let i = 0; i < this.anchors.length - 1; i++) {
+                let topElement = `[data-cfanchor="${this.anchors[i].replace('#', '')}"]`;
+                let bottomElement = `[data-cfanchor="${this.anchors[i + 1].replace('#', '')}"]`;
                 if (
-                    window.pageYOffset >= document.querySelector(topElement).pageYOffset - offset &&
-                    window.pageYOffset < document.querySelector(bottomElement).pageYOffset - offset
+                    window.pageYOffset >= document.querySelector(topElement).offsetTop - this.offset &&
+                    window.pageYOffset < document.querySelector(bottomElement).offsetTop - this.offset
                 ) {
                     isMenuChanged = true;
-                    selectMenuItem(anchors[i]);
+                    this.selectMenuItem(this.anchors[i]);
                 }
             }
 
             if (!isMenuChanged) {
-                selectMenuItem(anchors[anchors.length - 1]);
+                this.selectMenuItem(this.anchors[this.anchors.length - 1]);
             }
         });
     }
 
-    function selectMenuItem(anchor) {
-        if (anchor === previousAnchor) {
+    selectMenuItem(anchor) {
+        if (anchor === this.previousAnchor) {
             return;
         }
 
-        previousAnchor = anchor;
+        this.previousAnchor = anchor;
         window.location.hash = anchor;
         
         let menuItems = document.querySelectorAll('[data-cfmenuanchor]');
@@ -55,11 +51,13 @@
         }
     }
 
-    function handleClick() {
+    handleClick() {
         let menuItems = document.querySelectorAll(`[data-cfmenuanchor]`);
         for (let i = 0; i < menuItems.length; i++) {
-            let target = `[data-cfanchor="${menuItems[i].dataset.cfmenuanchor}"]`;
-            window.scrollTo(document.querySelector(target));
+            menuItems[i].addEventListener('click', () => {
+                let target = `[data-cfanchor="${menuItems[i].dataset.cfmenuanchor}"]`;
+                window.scrollTo(0, document.querySelector(target).offsetTop);
+            });
         }
     }
-})(window);
+}

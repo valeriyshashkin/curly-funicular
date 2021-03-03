@@ -66,10 +66,6 @@
 	</script> -->
 </head>
 <body>
-	<div id="mocha"></div>
-	<script src="../node_modules/mocha/mocha.js"></script>
-	<script src="../node_modules/chai/chai.js"></script>
-	<script>mocha.setup('bdd');</script>
 	<div class="desktop-panel" id="menu">
 		<div class="tab cfactive" data-cfmenuanchor="header">
 			<a href="#header" class="tab-link">
@@ -92,6 +88,12 @@
 	<div class="section" data-cfanchor="works"></div>
 	<div class="section" data-cfanchor="contacts"></div>
 
+	<div id="mocha"></div>
+
+	<script src="../node_modules/mocha/mocha.js"></script>
+	<script src="../node_modules/chai/chai.js"></script>
+	<script>mocha.setup('bdd');</script>
+	
 	<script src="../dist/curly-funicular.js"></script>
 	<script src="test.js"></script>
 	<script>mocha.run();</script>
