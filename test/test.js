@@ -8,7 +8,7 @@ describe('Select the active menu item when scrolling', function () {
     describe('Without offset', function () {
         it('selects the same menu item when not scrolled enough', function () {
             curlyFunicular.init({
-                menu: `#menu`,
+                menu: '#menu',
                 anchors: ['#header', '#works', '#contacts']
             });
 
