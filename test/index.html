@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 			let menu_prefix = 'desktop-';
 			if ($(document).width() < 950) {
@@ -63,14 +63,14 @@
 				});
 			});
 		});
-	</script>
+	</script> -->
 </head>
 <body>
 	<div id="mocha"></div>
 	<script src="../node_modules/mocha/mocha.js"></script>
 	<script src="../node_modules/chai/chai.js"></script>
 	<script>mocha.setup('bdd');</script>
-	<div class="desktop-panel" id="desktop-menu">
+	<div class="desktop-panel" id="menu">
 		<div class="tab active" data-menuanchor="header">
 			<a href="#header" class="tab-link">
 				<p class="tab-title">Привет</p>
@@ -83,26 +83,6 @@
 		</div>
 		<div class="tab" data-menuanchor="contacts">
 			<a href="#contacts" class="tab-link">
-				<p class="tab-title">Обращайтесь</p>
-			</a>
-		</div>
-	</div>
-	<div class="tab-panel" id="mobile-menu">
-		<div class="tab active" data-menuanchor="header">
-			<a href="#header" class="tab-link">
-				<p class="far fa-hand-paper tab-icon"></p>
-				<p class="tab-title">Привет</p>
-			</a>
-		</div>
-		<div class="tab" data-menuanchor="works">
-			<a href="#works" class="tab-link">
-				<p class="far fa-image tab-icon"></p>
-				<p class="tab-title">Сделано</p>
-			</a>
-		</div>
-		<div class="tab" data-menuanchor="contacts">
-			<a href="#contacts" class="tab-link">
-				<p class="fas fa-phone tab-icon"></p>
 				<p class="tab-title">Обращайтесь</p>
 			</a>
 		</div>

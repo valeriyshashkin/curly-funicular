@@ -17,18 +17,6 @@ html, body {
 	box-sizing: border-box;
 }
 
-.tab-panel {
-	position: fixed;
-	width: 100%;
-
-	bottom: 0;
-
-	background: #FFFFFF;
-	box-shadow: 0px -0.2px 1px rgba(0, 0, 0, 0.25);
-	display: flex;
-	z-index: 10;
-}
-
 .tab-link {
 	padding: 8px 0;
 }
@@ -63,15 +51,11 @@ a.tab-link, a.tab-link:visited {
 }
 
 @media only screen and (min-width: 950px) {
-	.tab-panel {
-		display: none;
-	}
-
 	.desktop-panel {
 		position: fixed;
 		width: 100%;
 
-		top: 0;
+		bottom: 0;
 
 		background: #FFFFFF;
 		display: flex;
