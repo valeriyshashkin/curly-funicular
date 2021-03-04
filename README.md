@@ -1,4 +1,9 @@
 # curly-funicular
+
+<div align="center">
+  <img src="curly-funicular.png" width="70%">
+</div>
+
 ## Usage
 You will need to include the JavaScript file `curly-funicular.js` (or the minified version `curly-funicular.min.js`). No jQuery required!😊
 
