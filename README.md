@@ -57,7 +57,7 @@ In order to create links to a certain section, you can use a normal URL link if 
 To link the menu with the active section you will have to make use of anchor links (#) as explained below in the options section.
 
 ## Options
-- `anchors`: (default `[]`) Defines the anchor links (#example) to be shown on the URL for each section. This option also allows users to bookmark a specific section. **Be careful!** if you use anchors, they can not have the same value as any ID element on the site.
+- `anchors`: (required) Defines the anchor links (#example) to be shown on the URL for each section. This option also allows users to bookmark a specific section. **Be careful!** if you use anchors, they can not have the same value as any ID element on the site.
 - `offset`: (default `0`) Determines how much you need to scroll to the next section for the menu to become active on it. Calculated as the height of the section minus the offset. It is necessary for a better user experience, especially when the user scrolls to the last section. When clicking on an anchor link, scrolling does not take into account the offset.
 
 ## License
