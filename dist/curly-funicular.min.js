@@ -1,7 +1,7 @@
 /*!
  * curly-funicular 1.0.0
  *
- * https://github.com/valeriyshashkin/curly-funiculars
+ * https://github.com/valeriyshashkin/curly-funicular
  * @license MIT licensed
  *
  * Copyright (c) 2021 valeriyshashkin
