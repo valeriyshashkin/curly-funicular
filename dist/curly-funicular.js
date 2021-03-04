@@ -1,47 +1,51 @@
-class CurlyFunicular {
-    constructor (config) {
-        this.anchors = config.anchors;
-        this.offset = config.offset || 0;
-        this.previousAnchor = this.anchors[0];
+(function (global) {
+    let anchors;
+    let offset;
+    let previousAnchor;
+
+    global.curlyFunicular = (config) => {
+        anchors = config.anchors;
+        offset = config.offset || 0;
+        previousAnchor = anchors[0];
 
         if (!window.location.hash) {
-            window.location.hash = this.anchors[0];
+            window.location.hash = anchors[0];
         }
 
-        this.selectMenuItem(window.location.hash);
-        this.handleClick();
-        this.listenEvent();
-    }
+        selectMenuItem(window.location.hash);
+        handleMenuItemClicks();
+        listenScroll();
+    };
 
-    listenEvent() {
+    const listenScroll = () => {
         window.addEventListener('scroll', () => {
             let isMenuChanged = false;
-            for (let i = 0; i < this.anchors.length - 1; i++) {
-                let topElement = `[data-cfanchor="${this.anchors[i].replace('#', '')}"]`;
-                let bottomElement = `[data-cfanchor="${this.anchors[i + 1].replace('#', '')}"]`;
+            for (let i = 0; i < anchors.length - 1; i++) {
+                let topElement = `[data-cfanchor="${anchors[i].replace('#', '')}"]`;
+                let bottomElement = `[data-cfanchor="${anchors[i + 1].replace('#', '')}"]`;
                 if (
-                    window.pageYOffset >= document.querySelector(topElement).offsetTop - this.offset &&
-                    window.pageYOffset < document.querySelector(bottomElement).offsetTop - this.offset
+                    window.pageYOffset >= document.querySelector(topElement).offsetTop - offset &&
+                    window.pageYOffset < document.querySelector(bottomElement).offsetTop - offset
                 ) {
                     isMenuChanged = true;
-                    this.selectMenuItem(this.anchors[i]);
+                    selectMenuItem(anchors[i]);
                 }
             }
 
             if (!isMenuChanged) {
-                this.selectMenuItem(this.anchors[this.anchors.length - 1]);
+                selectMenuItem(anchors[anchors.length - 1]);
             }
         });
-    }
+    };
 
-    selectMenuItem(anchor) {
-        if (anchor === this.previousAnchor) {
+    const selectMenuItem = (anchor) => {
+        if (anchor === previousAnchor) {
             return;
         }
 
-        this.previousAnchor = anchor;
+        previousAnchor = anchor;
         window.location.hash = anchor;
-        
+
         let menuItems = document.querySelectorAll('[data-cfmenuanchor]');
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].classList.remove('cfactive');
@@ -49,9 +53,9 @@ class CurlyFunicular {
                 menuItems[i].classList.add('cfactive');
             }
         }
-    }
+    };
 
-    handleClick() {
+    const handleMenuItemClicks = () => {
         let menuItems = document.querySelectorAll(`[data-cfmenuanchor]`);
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].addEventListener('click', () => {
@@ -59,5 +63,5 @@ class CurlyFunicular {
                 window.scrollTo(0, document.querySelector(target).offsetTop);
             });
         }
-    }
-}
+    };
+})(window);
