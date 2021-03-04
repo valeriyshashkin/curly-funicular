@@ -1,6 +1,5 @@
-# curly-funicular
-
 <div align="center">
+  <h1>curly-funicular</h1>
   <img src="curly-funicular.png" width="70%">
 </div>
 
