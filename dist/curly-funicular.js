@@ -68,7 +68,7 @@
     const handleMenuItemClicks = () => {
         let menuItems = document.querySelectorAll(`${menu} > [data-cfmenuanchor]`);
         for (let i = 0; i < menuItems.length; i++) {
-            menuItems[i].addEventListener('click', () => {
+            menuItems[i].addEventListener('click touchstart', () => {
                 let target = `[data-cfanchor="${menuItems[i].dataset.cfmenuanchor}"]`;
                 window.scrollTo(0, document.querySelector(target).offsetTop);
             });
