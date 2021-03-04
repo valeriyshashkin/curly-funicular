@@ -1,6 +1,6 @@
 # curly-funicular
 ## Usage
-You will need to include the JavaScript file curly-funicular.js (or the minified version curly-funicular.min.js). No JQuery required!😊
+You will need to include the JavaScript file `curly-funicular.js` (or the minified version `curly-funicular.min.js`). No JQuery required!😊
 
 ### Including files
 Place the script in front of the closing body tag.
