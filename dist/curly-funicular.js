@@ -1,3 +1,11 @@
+/*!
+ * curly-funicular 1.0.0
+ *
+ * https://github.com/valeriyshashkin/curly-funiculars
+ * @license MIT licensed
+ *
+ * Copyright (c) 2021 valeriyshashkin
+ */
 (function (global) {
     let anchors;
     let offset;
