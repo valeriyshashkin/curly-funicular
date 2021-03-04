@@ -14,7 +14,7 @@ describe('Select the active menu item when scrolling', function () {
             $(window).scrollTop($(document).find('[data-cfanchor]').height());
             chai.assert.equal($(document).find('.cfactive').index(), 1);
         });
-        it('selects the next menu item when scrolled enough', function () {
+        it.skip('selects the next menu item when scrolled enough', function () {
             curlyFunicular({
                 anchors: ['#header', '#works', '#contacts']
             });
@@ -28,7 +28,7 @@ describe('Select the active menu item when scrolling', function () {
             }
         });
     });
-    describe('With offset', function () {
+    describe.skip('With offset', function () {
         it('selects the same menu item when not scrolled enough with offset', function () {
             curlyFunicular({
                 anchors: ['#header', '#works', '#contacts'],
