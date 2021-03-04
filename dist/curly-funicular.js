@@ -7,11 +7,13 @@
  * Copyright (c) 2021 valeriyshashkin
  */
 (function (global) {
+    let menu;
     let anchors;
     let offset;
     let previousAnchor;
 
     global.curlyFunicular = (config) => {
+        menu = config.menu;
         anchors = config.anchors;
         offset = config.offset || 0;
         previousAnchor = anchors[0];
@@ -54,7 +56,7 @@
         previousAnchor = anchor;
         window.location.hash = anchor;
 
-        let menuItems = document.querySelectorAll('[data-cfmenuanchor]');
+        let menuItems = document.querySelectorAll(`${menu} > [data-cfmenuanchor]`);
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].classList.remove('cfactive');
             if (menuItems[i].dataset.cfmenuanchor === anchor.replace('#', '')) {
@@ -64,7 +66,7 @@
     };
 
     const handleMenuItemClicks = () => {
-        let menuItems = document.querySelectorAll(`[data-cfmenuanchor]`);
+        let menuItems = document.querySelectorAll(`${menu} > [data-cfmenuanchor]`);
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].addEventListener('click', () => {
                 let target = `[data-cfanchor="${menuItems[i].dataset.cfmenuanchor}"]`;

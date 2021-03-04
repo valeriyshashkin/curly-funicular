@@ -7,63 +7,6 @@
 	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<!-- <script>
-		$(document).ready(function() {
-			let menu_prefix = 'desktop-';
-			if ($(document).width() < 950) {
-				menu_prefix = 'mobile-';
-			}
-
-			let previous_anchor = '#header';
-
-			function selectMenuItem(anchor) {
-				if (anchor === previous_anchor) {
-					return;
-				}
-				previous_anchor = anchor;
-				window.location.hash = anchor;
-				$(`#${menu_prefix}menu > div`).each(function() {
-					$(this).removeClass('active');
-					if ($(this).data('menuanchor') === anchor.replace('#', '')) {
-						$(this).addClass('active');
-					}
-				});
-			}
-
-			let anchors = ['#header', '#works', '#contacts'];
-			let offset = 200;
-
-			if (!window.location.hash) {
-				window.location.hash = '#header';
-			}
-			selectMenuItem(window.location.hash);
-
-			$(window).scroll(function() {
-				let menu_changed = false;
-				for (let i = 0; i < anchors.length - 1; i++) {
-					let top_element = `[data-anchor="${anchors[i].replace('#', '')}"]`;
-					let bottom_element = `[data-anchor="${anchors[i + 1].replace('#', '')}"]`;
-					if (
-						$(window).scrollTop() >= $(document).find(top_element).position().top - offset &&
-					 	$(window).scrollTop() < $(document).find(bottom_element).position().top - offset
-					) {
-						menu_changed = true;
-						selectMenuItem(anchors[i]);
-					}
-				}
-				if (!menu_changed) {
-					selectMenuItem(anchors[anchors.length - 1]);
-				}
-			});
-
-			$(`#${menu_prefix}menu > .tab`).each(function() {
-				$(this).click(function() {
-					let target_element = `[data-anchor="${$(this).data('menuanchor')}"]`;
-					$(window).scrollTop($(document).find(target_element).position().top);
-				});
-			});
-		});
-	</script> -->
 </head>
 <body>
 	<div class="desktop-panel" id="menu">
