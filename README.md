@@ -58,7 +58,7 @@ In order to create links to a certain section, you can use a normal URL link if 
 To link the menu with the active section you will have to make use of anchor links (#) as explained below in the options section.
 
 ## Options
-- `menu`: (required) A selector can be used to specify the menu to link with the sections. This way the scrolling of the sections will activate the corresponding element in the menu using the class cfactive. This won't generate a menu but will just add the cfactive class to the element in the given menu with the corresponding anchor links. In order to link the elements of the menu with the sections, data-cfmenuanchor will be needed to use with the same anchor links as used within the sections. Example:
+- `menu`: (required) A selector can be used to specify the menu to link with the sections. This way the scrolling of the sections will activate the corresponding element in the menu using the class `cfactive`. This won't generate a menu but will just add the `cfactive` class to the element in the given menu with the corresponding anchor links. In order to link the elements of the menu with the sections, `data-cfmenuanchor` will be needed to use with the same anchor links as used within the sections. Example:
 ```html
 <ul id="menu">
     <li data-cfmenuanchor="first" class="cfactive">
