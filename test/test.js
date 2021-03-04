@@ -1,23 +1,24 @@
+function timeout() {
+    return new Promise(resolve => setTimeout(resolve));
+}
+
 describe('Select the active menu item when scrolling', function () {
     after(function () {
-        $(window).scrollTop(0);
+        $(window).scrollTop($(document).height());
     });
     describe('Without offset', function () {
-        it('selects the same menu item when not scrolled enough', function () {
+        it('selects the same menu item when not scrolled enough', async function () {
             curlyFunicular({
                 menu: '#menu',
                 anchors: ['#header', '#works', '#contacts']
             });
 
-            $(window).scrollTop($(document).find('[data-cfanchor]').height() - 1);
-            setTimeout(() => {
-                chai.assert.equal($(document).find('.cfactive').index(), 0);
-            });
+            await timeout($(window).scrollTop($(document).find('[data-cfanchor]').height() - 1));
+            chai.assert.equal($(document).find('.cfactive').index(), 0);
 
-            $(window).scrollTop($(document).find('[data-cfanchor]').height());
-            setTimeout(() => {
-                chai.assert.equal($(document).find('.cfactive').index(), 1);
-            });
+            await timeout($(window).scrollTop($(document).find('[data-cfanchor]').height()));
+            console.log($(document).find('.cfactive').index());
+            chai.assert.equal($(document).find('.cfactive').index(), 1);
         });
         it('selects the next menu item when scrolled enough', function () {
             curlyFunicular({
