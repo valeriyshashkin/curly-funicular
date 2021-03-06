@@ -9,6 +9,17 @@ before(async function () {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(path.join('file://', __dirname, '/index.html'));
+    await page.evaluate(() => {
+        window.indexInParent = function (node) {
+            var children = node.parentNode.childNodes;
+            var num = 0;
+            for (var i = 0; i < children.length; i++) {
+                if (children[i] == node) return num;
+                if (children[i].nodeType == 1) num++;
+            }
+            return -1;
+        }
+    });
 });
 
 after(async function () {
@@ -30,15 +41,6 @@ describe('Select the active menu item when scrolling', function () {
                 window.scrollTo(0, window.document.querySelector('[data-cfanchor]').offsetHeight - 1);
             });
             let result = await page.$eval('.cfactive', el => {
-                function indexInParent(node) {
-                    var children = node.parentNode.childNodes;
-                    var num = 0;
-                    for (var i = 0; i < children.length; i++) {
-                        if (children[i] == node) return num;
-                        if (children[i].nodeType == 1) num++;
-                    }
-                    return -1;
-                }
                 return indexInParent(el);
             });
             assert.equal(result, 0);
@@ -48,15 +50,6 @@ describe('Select the active menu item when scrolling', function () {
             });
             await page.waitForSelector('.cfactive[data-cfmenuanchor="works"]');
             result = await page.$eval('.cfactive', el => {
-                function indexInParent(node) {
-                    var children = node.parentNode.childNodes;
-                    var num = 0;
-                    for (var i = 0; i < children.length; i++) {
-                        if (children[i] == node) return num;
-                        if (children[i].nodeType == 1) num++;
-                    }
-                    return -1;
-                }
                 return indexInParent(el);
             });
             assert.equal(result, 1);
