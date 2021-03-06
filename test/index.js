@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
-const { assert } = require('chai');
 
 let browser;
 let page;
@@ -9,17 +8,6 @@ before(async function () {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(path.join('file://', __dirname, '/index.html'));
-    await page.evaluate(() => {
-        window.indexInParent = function (node) {
-            var children = node.parentNode.childNodes;
-            var num = 0;
-            for (var i = 0; i < children.length; i++) {
-                if (children[i] == node) return num;
-                if (children[i].nodeType == 1) num++;
-            }
-            return -1;
-        }
-    });
 });
 
 after(async function () {
@@ -30,29 +18,18 @@ after(async function () {
 describe('Select the active menu item when scrolling', function () {
     describe('Without offset', function () {
         it('selects the same menu item when not scrolled enough', async function () {
-            await page.evaluate(() => {
+            await page.evaluate(_ => {
                 curlyFunicular({
                     menu: '#menu',
                     anchors: ['#header', '#works', '#contacts']
                 });
             });
 
-            await page.evaluate(() => {
-                window.scrollTo(0, window.document.querySelector('[data-cfanchor]').offsetHeight - 1);
-            });
-            let result = await page.$eval('.cfactive', el => {
-                return indexInParent(el);
-            });
-            assert.equal(result, 0);
+            await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height() - 1));
+            await page.waitForSelector('.cfactive[data-cfmenuanchor="header"]');
 
-            await page.evaluate(() => {
-                window.scrollTo(0, window.document.querySelector('[data-cfanchor]').offsetHeight);
-            });
-            await page.waitForSelector('.cfactive[data-cfmenuanchor="works"]');
-            result = await page.$eval('.cfactive', el => {
-                return indexInParent(el);
-            });
-            assert.equal(result, 1);
+            await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height()));
+            await page.waitForSelector('.cfactive[data-cfmenufanchor="works"]');
         });
     });
     // it('selects the next menu item when scrolled enough', function () {
@@ -63,12 +40,12 @@ describe('Select the active menu item when scrolling', function () {
 
     //     for (let i = 1; i < 3; i++) {
     //         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 1);
-    //         setTimeout(() => {
+    //         setTimeout(_ => {
     //             assert.equal($(document).find('.cfactive').index(), i - 1);
     //         });
 
     //         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i);
-    //         setTimeout(() => {
+    //         setTimeout(_ => {
     //             assert.equal($(document).find('.cfactive').index(), i);
     //         });
     //     }
@@ -83,12 +60,12 @@ describe('Select the active menu item when scrolling', function () {
     //         });
 
     //         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 201);
-    //         setTimeout(() => {
+    //         setTimeout(_ => {
     //             assert.equal($(document).find('.cfactive').index(), 0);
     //         });
 
     //         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 200);
-    //         setTimeout(() => {
+    //         setTimeout(_ => {
     //             assert.equal($(document).find('.cfactive').index(), 1);
     //         });
     //     });
@@ -101,12 +78,12 @@ describe('Select the active menu item when scrolling', function () {
 
     //         for (let i = 1; i < 3; i++) {
     //             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 201);
-    //             setTimeout(() => {
+    //             setTimeout(_ => {
     //                 assert.equal($(document).find('.cfactive').index(), i - 1);
     //             });
 
     //             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 200);
-    //             setTimeout(() => {
+    //             setTimeout(_ => {
     //                 assert.equal($(document).find('.cfactive').index(), i);
     //             });
     //         }
