@@ -15,78 +15,87 @@ after(async function () {
     browser.close();
 });
 
-describe('Select the active menu item when scrolling', function () {
-    describe('Without offset', function () {
-        it('selects the same menu item when not scrolled enough', async function () {
-            await page.evaluate(_ => {
-                curlyFunicular({
-                    menu: '#menu',
-                    anchors: ['#header', '#works', '#contacts']
-                });
-            });
+async function init(config) {
+    await page.evaluate(c => curlyFunicular(c), config);
+}
 
-            await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height() - 1));
-            await page.waitForSelector('.cfactive[data-cfmenuanchor="header"]');
-
-            await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height()));
-            await page.waitForSelector('.cfactive[data-cfmenuanchor="works"]');
+describe('Not scrolled enough', function () {
+    it('To section 2', async function () {
+        await init({
+            menu: '#menu',
+            anchors: ['#header', '#works', '#contacts']
         });
+
+        await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height() - 1));
+        await page.waitForSelector('.cfactive[data-cfmenuanchor="header"]');
     });
-    // it('selects the next menu item when scrolled enough', function () {
-    //     curlyFunicular({
-    //         menu: '#menu',
-    //         anchors: ['#header', '#works', '#contacts']
-    //     });
-
-    //     for (let i = 1; i < 3; i++) {
-    //         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 1);
-    //         setTimeout(_ => {
-    //             assert.equal($(document).find('.cfactive').index(), i - 1);
-    //         });
-
-    //         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i);
-    //         setTimeout(_ => {
-    //             assert.equal($(document).find('.cfactive').index(), i);
-    //         });
-    //     }
-    // });
-    // });
-    // describe('With offset', function () {
-    //     it('selects the same menu item when not scrolled enough with offset', function () {
-    //         curlyFunicular({
-    //             menu: '#menu',
-    //             anchors: ['#header', '#works', '#contacts'],
-    //             offset: 200
-    //         });
-
-    //         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 201);
-    //         setTimeout(_ => {
-    //             assert.equal($(document).find('.cfactive').index(), 0);
-    //         });
-
-    //         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 200);
-    //         setTimeout(_ => {
-    //             assert.equal($(document).find('.cfactive').index(), 1);
-    //         });
-    //     });
-    //     it('selects the next menu item when scrolled enough with offset', function () {
-    //         curlyFunicular({
-    //             menu: '#menu',
-    //             anchors: ['#header', '#works', '#contacts'],
-    //             offset: 200
-    //         });
-
-    //         for (let i = 1; i < 3; i++) {
-    //             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 201);
-    //             setTimeout(_ => {
-    //                 assert.equal($(document).find('.cfactive').index(), i - 1);
-    //             });
-
-    //             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 200);
-    //             setTimeout(_ => {
-    //                 assert.equal($(document).find('.cfactive').index(), i);
-    //             });
-    //         }
-    //     });
-    // });
 });
+
+describe('Scrolled enough', function () {
+    it('To section 2', async function () {
+        await init({
+            menu: '#menu',
+            anchors: ['#header', '#works', '#contacts']
+        });
+
+        await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height()));
+        await page.waitForSelector('.cfactive[data-cfmenuanchor="works"]');
+    });
+});
+// it('selects the next menu item when scrolled enough', function () {
+//     curlyFunicular({
+//         menu: '#menu',
+//         anchors: ['#header', '#works', '#contacts']
+//     });
+
+//     for (let i = 1; i < 3; i++) {
+//         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 1);
+//         setTimeout(_ => {
+//             assert.equal($(document).find('.cfactive').index(), i - 1);
+//         });
+
+//         $(window).scrollTop($(document).find('[data-cfanchor]').height() * i);
+//         setTimeout(_ => {
+//             assert.equal($(document).find('.cfactive').index(), i);
+//         });
+//     }
+// });
+// });
+// describe('With offset', function () {
+//     it('selects the same menu item when not scrolled enough with offset', function () {
+//         curlyFunicular({
+//             menu: '#menu',
+//             anchors: ['#header', '#works', '#contacts'],
+//             offset: 200
+//         });
+
+//         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 201);
+//         setTimeout(_ => {
+//             assert.equal($(document).find('.cfactive').index(), 0);
+//         });
+
+//         $(window).scrollTop($(document).find('[data-cfanchor]').height() - 200);
+//         setTimeout(_ => {
+//             assert.equal($(document).find('.cfactive').index(), 1);
+//         });
+//     });
+//     it('selects the next menu item when scrolled enough with offset', function () {
+//         curlyFunicular({
+//             menu: '#menu',
+//             anchors: ['#header', '#works', '#contacts'],
+//             offset: 200
+//         });
+
+//         for (let i = 1; i < 3; i++) {
+//             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 201);
+//             setTimeout(_ => {
+//                 assert.equal($(document).find('.cfactive').index(), i - 1);
+//             });
+
+//             $(window).scrollTop($(document).find('[data-cfanchor]').height() * i - 200);
+//             setTimeout(_ => {
+//                 assert.equal($(document).find('.cfactive').index(), i);
+//             });
+//         }
+//     });
+// });
