@@ -29,7 +29,7 @@ describe('Select the active menu item when scrolling', function () {
             await page.waitForSelector('.cfactive[data-cfmenuanchor="header"]');
 
             await page.evaluate(_ => $(window).scrollTop($('[data-cfanchor]').eq(0).height()));
-            await page.waitForSelector('.cfactive[data-cfmenufanchor="works"]');
+            await page.waitForSelector('.cfactive[data-cfmenuanchor="works"]');
         });
     });
     // it('selects the next menu item when scrolled enough', function () {
